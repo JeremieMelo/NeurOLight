@@ -1,0 +1,55 @@
+dataset:
+  pol_list: ["rHz_0", "rHz_1"]
+  processed_dir: random_size5
+
+criterion:
+  name: cmae
+  aux_output_weight: 0.0
+
+aux_criterion:
+  curl_loss:
+    weight: 0.0
+  tv_loss:
+    weight: 0.0
+  poynting_loss:
+    weight: 0.0
+
+optimizer:
+  name: adam
+  lr: 0.002
+  weight_decay: 0.000
+
+scheduler:
+  name: cosine
+  lr_gamma: 0.99
+  lr_min: 0.00001
+
+run:
+  experiment: "mmi_unet_train_random"
+  n_epochs: 200
+  batch_size: 4
+
+quantize:
+  weight_bit: 32
+  input_bit: 32
+
+checkpoint:
+  save_best_model_k: 3
+  checkpoint_dir: "mmi/unet/train_random"
+  model_comment: ""
+  resume: 0
+  restore_checkpoint: ""
+  no_linear: 0
+
+model:
+  name: "UNet"
+
+debug:
+  verbose: 1
+
+plot:
+  train: True
+  valid: True
+  test: True
+  interval: 1
+  dir_name: train_r_pos_Hz5

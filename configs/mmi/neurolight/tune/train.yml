@@ -1,0 +1,66 @@
+dataset:
+  pol_list: ["rHz_0", "rHz_1"]
+  processed_dir: random_size5
+
+criterion:
+  name: cmae
+  aux_output_weight: 0.0
+
+aux_criterion:
+  curl_loss:
+    weight: 0.0
+  tv_loss:
+    weight: 0.0
+  poynting_loss:
+    weight: 0.0
+
+lp_optimizer:
+  name: adam
+  lr: 0.002
+  weight_decay: 0.000
+
+lp_scheduler:
+  name: cosine
+  lr_gamma: 0.99
+  lr_min: 0.00001
+
+ft_optimizer:
+  name: adam
+  lr: 0.0002
+  weight_decay: 0.000
+
+ft_scheduler:
+  name: cosine
+  lr_gamma: 0.99
+  lr_min: 0.00001
+
+run:
+  experiment: "mmi_neurolight_tune"
+  n_lp_epochs: 20
+  n_ft_epochs: 20
+  batch_size: 4
+
+quantize:
+  weight_bit: 32
+  input_bit: 32
+
+checkpoint:
+  save_best_model_k: 3
+  checkpoint_dir: "mmi/neurolight/tune"
+  model_comment: "lpft"
+  resume: 0
+  restore_checkpoint: ""
+  no_linear: 0
+
+model:
+  name: "NeurOLight2d"
+
+debug:
+  verbose: 1
+
+plot:
+  train: True
+  valid: True
+  test: True
+  interval: 1
+  dir_name: train_r_pos_Hz5

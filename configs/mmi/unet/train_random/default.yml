@@ -1,0 +1,42 @@
+criterion:
+  name: cmae
+
+optimizer:
+  name: adamw
+  lr: 0.002
+  weight_decay: 0.0001
+
+scheduler:
+  name: cosine
+  lr_gamma: 0.99
+  lr_min: 0
+
+run:
+  experiment: "default"
+  n_epochs: 100
+  batch_size: 4
+  use_cuda: 1
+  gpu_id: 0
+  deterministic: 1
+  random_state: 42
+  log_interval: 10
+  train_noise: 0
+
+quantize:
+  weight_bit: 32
+  input_bit: 32
+
+checkpoint:
+  save_best_model_k: 3
+  checkpoint_dir: "mmi/unet/pretrain"
+  model_comment: ""
+  resume: 0
+  restore_checkpoint: ""
+  no_linear: 0
+
+model:
+  name: "UNet"
+
+debug:
+  verbose: 1
+

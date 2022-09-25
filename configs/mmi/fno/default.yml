@@ -1,0 +1,124 @@
+dataset:
+  name: mmi
+  root: "./data"
+  num_workers: 2
+  img_height: 80
+  img_width: 384
+  train_valid_split_ratio: [0.7, 0.3]
+  center_crop: null
+  resize_mode: bicubic
+  n_test_samples: null
+  n_valid_samples: null
+  test_ratio: 0.2
+  in_channels: 4
+  num_classes: 10
+  transform: basic
+  shuffle: 1
+  pol_list: ["Hz_0", "Hz_1"]
+  processed_dir: processed
+  augment:
+    mixup_alpha: 1.
+    cutmix_alpha: 0.
+    cutmix_minmax: null
+    prob: 0.8
+    switch_prob: 0.
+    mode: elem
+    correct_lam: True
+    random_vflip_ratio: 0.5
+  test_augment:
+    mixup_alpha: 1.
+    cutmix_alpha: 0.
+    cutmix_minmax: null
+    prob: 1
+    switch_prob: 0.
+    mode: elem
+    correct_lam: True
+    random_vflip_ratio: 0
+
+criterion:
+  name: cmse
+  aux_output_weight: 0
+  norm: False
+
+aux_criterion:
+  curl_loss:
+    weight: 0.0
+  tv_loss:
+    weight: 0.0
+    norm: False
+
+optimizer:
+  name: adamw
+  lr: 0.002
+  weight_decay: 0.000
+
+scheduler:
+  name: cosine
+  lr_gamma: 0.99
+  lr_min: 0
+
+run:
+  experiment: "default"
+  n_epochs: 100
+  batch_size: 8
+  use_cuda: 1
+  gpu_id: 0
+  deterministic: 1
+  random_state: 42
+  log_interval: 10
+  train_noise: 0
+
+quantize:
+  weight_bit: 32
+  input_bit: 32
+
+checkpoint:
+  save_best_model_k: 3
+  checkpoint_dir: "mmi/fno/pretrain"
+  model_comment: ""
+  resume: 0
+  restore_checkpoint: ""
+  no_linear: 0
+
+model:
+  name: "FNO2d"
+  out_channels: 2
+  dim: 32
+  # kernel_list: [64,64,64,64,64]
+  kernel_list: [32, 32, 32, 32, 32]
+  # kernel_list: [16, 16, 16, 16, 16]
+  # kernel_size_list: [3, 3, 3, 3, 3]
+  kernel_size_list: [1, 1, 1, 1, 1]
+  hidden_list: [256]
+  # hidden_list: [512]
+  # padding_list: [1, 1, 1, 1, 1]
+  padding_list: [0, 0, 0, 0, 0]
+  # mode_list: [[40, 261], [40, 261], [40, 261], [40, 261], [40, 261]]
+  mode_list: [[40, 193], [40, 193], [40, 193], [40, 193], [40, 193]]
+  act_func: GELU
+  act_thres: 100
+  # domain_size: [8, 52] # um
+  # domain_size: [8, 52] # um
+  domain_size: [8, 38.4] # um
+  grid_step: 0.1 # um
+  buffer_width: 0.0 # um
+  dropout_rate: 0.1
+  drop_path_rate: 0
+  norm: bn
+  wavelength: 1.55
+  aux_head: False
+  aux_head_idx: 1
+  pos_encoding: exp
+  with_cp: False
+
+debug:
+  verbose: 1
+
+plot:
+  train: True
+  valid: True
+  test: True
+  interval: 10
+  root: plot
+  dir_name: default
+
