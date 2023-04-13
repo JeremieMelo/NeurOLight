@@ -74,7 +74,7 @@ We discretize different devices into a unified domain, represent parametric PDEs
 * Test the trained model on test simulation instances with the single-shot multi-source mode. (Need to modify the path to trained checkpoint in the script).
 `python3 scripts/mmi/MODEL/test_main_results.py`
 
-
+* Checkpoints for 12-layer NeurOLight on tunable MMIs and 16-layer NeurOLight on etched MMIs are available at [link](https://utexas.box.com/s/826vofcweenufhu3qiq98cko2tvu9ntt)
 
 # Citing NeurOLight
 ```
