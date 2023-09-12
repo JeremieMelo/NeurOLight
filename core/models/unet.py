@@ -15,7 +15,6 @@ from torch.functional import Tensor
 from torch.types import Device
 
 from .constant import *
-from .layers import PermittivityEncoder
 from .pde_base import PDE_NN_BASE
 
 __all__ = ["UNet"]
@@ -145,18 +144,6 @@ class UNet(PDE_NN_BASE):
 
     def set_trainable_permittivity(self, mode: bool = True) -> None:
         self.trainable_permittivity = mode
-
-    def init_trainable_permittivity(
-        self,
-        regions: Tensor,
-        valid_range: Tuple[int],
-    ):
-        self.permittivity_encoder = PermittivityEncoder(
-            size=self.domain_size_pixel,
-            regions=regions,
-            valid_range=valid_range,
-            device=self.device,
-        )
 
     def requires_network_params_grad(self, mode: float = True) -> None:
         params = self.parameters()
