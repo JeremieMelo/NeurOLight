@@ -75,6 +75,7 @@ We discretize different devices into a unified domain, represent parametric PDEs
 `python3 scripts/mmi/MODEL/test_main_results.py`
 
 * Checkpoints for 12-layer NeurOLight on tunable MMIs and 16-layer NeurOLight on etched MMIs are available at [link](https://arizonastateu-my.sharepoint.com/:f:/g/personal/jiaqigu_asurite_asu_edu/Ei0mWS6CJrNEkojLGbAF-kwBwXZ4fpJi0PIOS1cI0SjrrQ?e=X9jMnB)
+* Simulation dataset for Tunable MMI and etched MMI are available at [link](https://arizonastateu-my.sharepoint.com/:f:/g/personal/jiaqigu_asurite_asu_edu/EpQ8RWFNWDJOloFudgcmwiIB5ENvNhWsK_yxjFa_WD5apA?e=T7MAn8). Unzip it and place all `*.pt` under `data/mmi/raw/*.pt`.
 
 # Citing NeurOLight
 ```
